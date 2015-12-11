@@ -15,4 +15,6 @@ Stay hungry,Stay foolish,and Stay crazy enough.
 
 * Github: [thirtyyuan](https://github.com/thirtyyuan)
 
-* Weibo: [thirtyyuan](thirtyyuan.blogspot.jp)
+* Blogger: [thirtyyuan](http://thirtyyuan.blogspot.jp)
+
+* XinlangWeibo: [thirtyyuan]
