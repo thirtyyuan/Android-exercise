@@ -27,7 +27,7 @@ public class MainActivity extends Activity {
     private String provider;
     private TextView positionTextView;
     private LocationManager locationManager;
-    public static final int LOCATION_ASK_CODE = 7 ;
+    public static final int MULTIPLE_PERMISSION_ASK_CODE = 0 ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,12 +46,25 @@ public class MainActivity extends Activity {
 
     public void checkPermission(){
         //判断当前Activity是否已经获得了该权限
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            locationProvider();
-        } else {
-            //请求用户授予权限
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_ASK_CODE);
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            addPermission(permissionList, Manifest.permission.ACCESS_FINE_LOCATION);
         }
+
+        if (permissionList.size() > 0) {
+            for (int i = 0; i < permissionList.size(); i++){
+                //请求用户授予权限
+                ActivityCompat.requestPermissions(this, new String[]{permissionList.get(i)}, MULTIPLE_PERMISSION_ASK_CODE);
+                permissionList.remove(i);
+            }
+            return;
+        } else {
+            locationProvider();
+        }
+    }
+    
+    //添加权限到 permissionList 的方法
+    private void addPermission(List<String> permissionList, String permission) {
+        permissionList.add(permission);
     }
 
     @Override
