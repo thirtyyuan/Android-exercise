@@ -46,32 +46,26 @@ public class MainActivity extends Activity {
 
     public void checkPermission(){
         //判断当前Activity是否已经获得了该权限
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            addPermission(permissionList, Manifest.permission.ACCESS_FINE_LOCATION);
-        }
-
-        if (permissionList.size() > 0) {
-            for (int i = 0; i < permissionList.size(); i++){
-                //请求用户授予权限
-                ActivityCompat.requestPermissions(this, new String[]{permissionList.get(i)}, MULTIPLE_PERMISSION_ASK_CODE);
-                permissionList.remove(i);
-            }
-            return;
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            //若有权限不满足，则请求授予权限
+            requestMultiplePermissions();
         } else {
             locationProvider();
         }
     }
     
-    //添加权限到 permissionList 的方法
-    private void addPermission(List<String> permissionList, String permission) {
-        permissionList.add(permission);
+    //同时请求授予多个权限
+   private void requestMultiplePermissions() {
+        String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.CAMERA};
+        ActivityCompat.requestPermissions(this, permissions, MULTIPLE_PERMISSION_ASK_CODE);
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         switch (requestCode) {
-            case LOCATION_ASK_CODE: {
-                // 如果请求被拒绝，那么通常grantResults数组为空
+            case MULTIPLE_PERMISSION_ASK_CODE: {
+                // 如果请求被拒绝，那么通常 grantResults 数组为空
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     //申请成功，进行相应操作
                     Toast.makeText(this,"Thank you for your grant! ",Toast.LENGTH_SHORT).show();
