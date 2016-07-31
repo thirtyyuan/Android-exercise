@@ -65,16 +65,25 @@ public class MainActivity extends Activity {
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         switch (requestCode) {
             case MULTIPLE_PERMISSION_ASK_CODE: {
-                // 如果请求被拒绝，那么通常 grantResults 数组为空
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    //申请成功，进行相应操作
-                    Toast.makeText(this,"Thank you for your grant! ",Toast.LENGTH_SHORT).show();
-                    locationProvider();
-                } else {
+                if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                        || ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
                     //申请失败，可以继续向用户解释
-                    Toast.makeText(this,"OH...Permission has been Denied.",Toast.LENGTH_SHORT).show();
+                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                    builder.setTitle("Help")
+                            .setMessage("Need some permission to run this app.")
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    checkPermission();
+                                }
+                            })
+                            .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                }
+                            })
+                            .show();
                 }
-                return;
             }
         }
     }
