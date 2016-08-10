@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="40dp">
+
+
+    <TextView
+        android:textSize="25.0sp"
+        android:textColor="#ff969696"
+        android:id="@+id/buddy_listview_child_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="昵称"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="12.0dp"/>
+    <TextView
+        android:textSize="20.0sp"
+        android:id="@+id/buddy_listview_child_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="583.%"
+        android:layout_toRightOf="@id/buddy_listview_child_name"
+        android:layout_centerVertical="true"/>
+    <ImageView
+        android:id="@+id/buddy_listview_child_status"
+        android:layout_width="25.0dp"
+        android:layout_height="25.0dp"
+        android:layout_marginRight="12.0dp"
+        android:src="@drawable/online"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true" />
+    <TextView
+        android:textSize="13.0sp"
+        android:textColor="#ffbbbbbb"
+        android:id="@+id/lastUpdateTimeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10.0dp"
+        android:text="2016-08-08 13:20"
+        android:layout_toLeftOf="@id/buddy_listview_child_status"
+        android:layout_centerVertical="true" />
+
+</RelativeLayout>

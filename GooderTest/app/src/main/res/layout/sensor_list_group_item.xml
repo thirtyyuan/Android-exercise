@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="#ffb7d8fc"
+    android:layout_width="match_parent"
+    android:layout_height="40.0dip"
+    android:padding="5dp">
+
+    <ImageView
+        android:id="@+id/listview_menu"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginLeft="5.0dip"
+        android:src="@drawable/closed_menu"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true" />
+    <TextView
+        android:textSize="20.0sp"
+        android:textColor="#ff000000"
+        android:id="@+id/buddy_listview_group_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="分组名称"
+        android:layout_toRightOf="@id/listview_menu"
+        android:layout_centerVertical="true" />
+    <TextView
+        android:textColor="#ff333333"
+        android:id="@+id/buddy_listview_group_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10.0dip"
+        android:text="[10/10]"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true" />
+
+</RelativeLayout>
