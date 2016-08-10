@@ -95,6 +95,7 @@ public class MainActivity extends Activity {
                             })
                             .show();
                 }
+<<<<<<< HEAD
 //                // 如果请求被拒绝，那么通常grantResults数组为空
 //                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 //                    //申请成功，进行相应操作
@@ -103,6 +104,8 @@ public class MainActivity extends Activity {
 //                } else {
 //
 //                }
+=======
+>>>>>>> 45b85eadd64b84db64b9e8f6a48583b1dbaf22b7
             }
         }
     }
