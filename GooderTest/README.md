@@ -1,0 +1,1 @@
+This is my first Android project. It use a IoT platform API to show your sensor, so that you can see your environment information on your Android phone.
