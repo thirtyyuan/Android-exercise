@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import com.geekynu.goodertest.model.Gateway;
+import com.geekynu.goodertest.model.mySensor;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,21 +41,55 @@ public class Utility  {
             JSONArray gatewayInfo = new JSONArray(response);
             List<Gateway> gatewayList = new ArrayList<>();
             int GatewayListSize = gatewayInfo.length();
-            int i = 0;
+            int i = 0, j = 0;
             do {
-                JSONObject jsonObject = gatewayInfo.getJSONObject(i);
-                long id = jsonObject.getLong("id");
-                String name = jsonObject.getString("name");
-                String description = jsonObject.getString("description");
-                String typeName = jsonObject.getString("typeName");
-                Object sensorInfo = new JSONArray(jsonObject.getString("sensors"));
-                int sensorNum = ((JSONArray)sensorInfo).length();
+                JSONObject JGateway = gatewayInfo.getJSONObject(i);
+                long id = JGateway.getLong("id");
+                String name = JGateway.getString("name");
+                String description = JGateway.getString("description");
+                String typeName = JGateway.getString("typeName");
+                JSONArray sensorInfo = new JSONArray(JGateway.getString("sensors"));
+                int sensorNum = sensorInfo.length();
                 Gateway gateway = new Gateway(id, name, description, typeName, sensorNum);
                 gatewayList.add(gateway);
                 i++;
             } while (i < GatewayListSize);
             return gatewayList;
 
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static List<mySensor> handleSensorResponse(String response){
+        try {
+            JSONArray gatewayInfo = new JSONArray(response);
+            List<mySensor> sensorList = new ArrayList<>();
+            int GatewayListSize = gatewayInfo.length();
+            int position = PositionPointer.getPosition();
+            int j = 0;
+            if (position <= GatewayListSize) {
+                JSONObject JGateway = gatewayInfo.getJSONObject(position);
+                JSONArray sensorInfo = new JSONArray(JGateway.getString("sensors"));
+                int sensorNum = sensorInfo.length();
+                do {
+                    JSONObject JSensor = sensorInfo.getJSONObject(j);
+                    long sensorId = JSensor.getLong("id");
+                    String sensorName = JSensor.getString("name");
+                    String sensorValue = JSensor.getString("value");
+                    String sensorUnit = JSensor.getString("unit");
+                    String sensorLastUpdateTime = JSensor.getString("lastUpdateTime");
+                    boolean sensorIsOnline = JSensor.getBoolean("isOnline");
+                    boolean sensorIsAlarm = JSensor.getBoolean("isAlarm");
+                    mySensor sensor = new mySensor(sensorId, sensorName, sensorValue, sensorUnit, sensorLastUpdateTime, sensorIsOnline , sensorIsAlarm);
+                    sensorList.add(sensor);
+                    j++;
+                } while (j < sensorNum);
+                return sensorList;
+            } else {
+                return null;
+            }
         } catch (JSONException e) {
             e.printStackTrace();
             return null;

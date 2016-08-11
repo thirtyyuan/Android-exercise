@@ -1,7 +1,5 @@
 package com.geekynu.goodertest.model;
 
-import android.hardware.Sensor;
-
 import java.util.List;
 
 /**
@@ -15,7 +13,7 @@ public class Gateway {
     public Boolean internetAvailable;
     public Boolean isControlled;
     public String name;
-    public List<Sensor> sensors;
+    public List<mySensor> sensorList;
     public String typeName;
     public int sensorNum;
 
@@ -25,10 +23,6 @@ public class Gateway {
         this.description = description;
         this.typeName = typeName;
         this.sensorNum = sensorNum;
-    }
-
-    public int getSensorsSize() {
-        return this.sensors.size();
     }
 
     public String getApiAddress() {
@@ -87,13 +81,6 @@ public class Gateway {
         this.name = name;
     }
 
-    public List<Sensor> getSensors() {
-        return sensors;
-    }
-
-    public void setSensors(List<Sensor> sensors) {
-        this.sensors = sensors;
-    }
 
     public String getTypeName() {
         return typeName;

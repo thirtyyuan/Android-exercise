@@ -5,8 +5,9 @@
 
     <com.geekynu.goodertest.UI.TitleMainLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
+        android:layout_height="wrap_content"
+        android:paddingTop="24dp"
+        android:background="#1976D2">
     </com.geekynu.goodertest.UI.TitleMainLayout>
 
     <ListView

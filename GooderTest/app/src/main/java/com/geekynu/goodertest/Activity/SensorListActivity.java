@@ -1,6 +1,5 @@
 package com.geekynu.goodertest.Activity;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -10,10 +9,9 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.geekynu.goodertest.R;
-import com.geekynu.goodertest.model.Gateway;
-import com.geekynu.goodertest.model.GatewayAdapter;
+import com.geekynu.goodertest.model.mySensor;
+import com.geekynu.goodertest.model.mySensorAdapter;
 import com.geekynu.goodertest.util.HttpUtil;
-import com.geekynu.goodertest.util.PositionPointer;
 import com.geekynu.goodertest.util.Utility;
 import com.sdsmdg.tastytoast.TastyToast;
 
@@ -23,24 +21,23 @@ import java.util.List;
 import qiu.niorgai.StatusBarCompat;
 
 /**
- * Created by yuanhonglei on 8/9/16.
+ * Created by yuanhonglei on 8/11/16.
  */
-public class MainActivity extends BaseActivity {
-    private List<Gateway> gatewayList = new ArrayList<>();
+public class SensorListActivity extends BaseActivity {
+    private List<mySensor> mySensorList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.sensor_list);
-        StatusBarCompat.translucentStatusBar(MainActivity.this);
-        initGateways();
-
+        StatusBarCompat.translucentStatusBar(SensorListActivity.this);
+        initSensors();
     }
 
-    private void initGateways() {
+    private void initSensors() {
         String getGatewayURL = "http://open.lewei50.com/api/V1/User/GetSensorswithgateway?userkey=";
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(SensorListActivity.this);
         final String userkey = prefs.getString("userKey", "");
         final String address  = getGatewayURL + userkey;
         HttpUtil.sendHttpRequest(address, new HttpUtil.HttpCallbackListener() {
@@ -49,19 +46,17 @@ public class MainActivity extends BaseActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        gatewayList = Utility.handleGatewayResponse(response);
-                        if (gatewayList == null) {
-                            TastyToast.makeText(MainActivity.this, "获取失败，请稍后再试", TastyToast.LENGTH_SHORT, TastyToast.ERROR);
+                        mySensorList = Utility.handleSensorResponse(response);
+                        if (mySensorList == null) {
+                            TastyToast.makeText(SensorListActivity.this, "获取失败，请稍后再试", TastyToast.LENGTH_SHORT, TastyToast.ERROR);
                         } else {
-                            GatewayAdapter adapter = new GatewayAdapter(MainActivity.this, R.layout.sensor_list_group_item, gatewayList);
+                            mySensorAdapter adapter = new mySensorAdapter(SensorListActivity.this, R.layout.sensor_list_child_item, mySensorList);
                             ListView listView = (ListView) findViewById(R.id.sensor_list_view);
                             listView.setAdapter(adapter);
                             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                    PositionPointer.setPosition(position);
-                                    Intent intent = new Intent(MainActivity.this, SensorListActivity.class);
-                                    startActivity(intent);
+
                                 }
                             });
                         }
@@ -74,7 +69,7 @@ public class MainActivity extends BaseActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        TastyToast.makeText(MainActivity.this, "获取网关数据失败", TastyToast.LENGTH_SHORT, TastyToast.ERROR);
+                        TastyToast.makeText(SensorListActivity.this, "获取传感器数据失败", TastyToast.LENGTH_SHORT, TastyToast.ERROR);
                     }
                 });
             }

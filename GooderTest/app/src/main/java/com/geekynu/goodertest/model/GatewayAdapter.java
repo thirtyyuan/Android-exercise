@@ -23,13 +23,27 @@ public class GatewayAdapter extends ArrayAdapter<Gateway> {
     }
 
     @Override
-    public View getView(int position, View contentView, ViewGroup parent) {
+    public View getView(int position, View convertView, ViewGroup parent) {
         Gateway gateway = getItem(position);
-        View view = LayoutInflater.from(getContext()).inflate(resourceId, null);
-        TextView groupName = (TextView) view.findViewById(R.id.buddy_listview_group_name);
-        TextView groupNum = (TextView) view.findViewById(R.id.buddy_listview_group_num);
-        groupName.setText(gateway.getName());
-        groupNum.setText(gateway.getSensorNum() + "个传感器");
+        View view;
+        ViewHolder viewHolder;
+        if (convertView == null) {
+            view = LayoutInflater.from(getContext()).inflate(resourceId, null);
+            viewHolder = new ViewHolder();
+            viewHolder.groupName = (TextView) view.findViewById(R.id.buddy_listview_group_name);
+            viewHolder.groupNum = (TextView) view.findViewById(R.id.buddy_listview_group_num);
+            view.setTag(viewHolder);
+        } else {
+            view = convertView;
+            viewHolder = (ViewHolder) view.getTag();
+        }
+        viewHolder.groupName.setText(gateway.getName());
+        viewHolder.groupNum.setText(gateway.getSensorNum() + "个传感器");
         return view;
+    }
+
+    class ViewHolder {
+        TextView groupName;
+        TextView groupNum;
     }
 }
