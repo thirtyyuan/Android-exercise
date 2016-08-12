@@ -1,5 +1,6 @@
 package com.geekynu.goodertest.Activity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -12,6 +13,7 @@ import com.geekynu.goodertest.R;
 import com.geekynu.goodertest.model.mySensor;
 import com.geekynu.goodertest.model.mySensorAdapter;
 import com.geekynu.goodertest.util.HttpUtil;
+import com.geekynu.goodertest.util.PositionPointer;
 import com.geekynu.goodertest.util.Utility;
 import com.sdsmdg.tastytoast.TastyToast;
 
@@ -56,7 +58,9 @@ public class SensorListActivity extends BaseActivity {
                             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                                    PositionPointer.setPositionItem(position);
+                                    Intent intent = new Intent(SensorListActivity.this, HistoryDataActivity.class);
+                                    startActivity(intent);
                                 }
                             });
                         }

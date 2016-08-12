@@ -27,6 +27,10 @@
             android:launchMode="singleTask">
 
         </activity>
+
+        <activity android:name=".Activity.HistoryDataActivity">
+
+        </activity>
     </application>
 
 </manifest>

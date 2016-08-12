@@ -6,6 +6,16 @@ package com.geekynu.goodertest.util;
 public class PositionPointer {
     static int position;
 
+    public static int getPositionItem() {
+        return positionItem;
+    }
+
+    public static void setPositionItem(int positionItem) {
+        PositionPointer.positionItem = positionItem;
+    }
+
+    static int positionItem;
+
     public static int getPosition() {
         return position;
     }
