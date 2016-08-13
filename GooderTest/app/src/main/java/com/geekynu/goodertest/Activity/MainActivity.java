@@ -9,6 +9,7 @@ import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.baoyz.widget.PullRefreshLayout;
 import com.geekynu.goodertest.R;
 import com.geekynu.goodertest.model.Gateway;
 import com.geekynu.goodertest.model.GatewayAdapter;
@@ -27,6 +28,7 @@ import qiu.niorgai.StatusBarCompat;
  */
 public class MainActivity extends BaseActivity {
     private List<Gateway> gatewayList = new ArrayList<>();
+    PullRefreshLayout layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,14 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sensor_list);
         StatusBarCompat.translucentStatusBar(MainActivity.this);
+
+        layout = (PullRefreshLayout) findViewById(R.id.swipeRefreshLayout);
+        layout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                initGateways();
+            }
+        });
         initGateways();
 
     }
@@ -79,5 +89,6 @@ public class MainActivity extends BaseActivity {
                 });
             }
         });
+        layout.setRefreshing(false);
     }
 }

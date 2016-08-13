@@ -9,6 +9,7 @@ import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.baoyz.widget.PullRefreshLayout;
 import com.geekynu.goodertest.R;
 import com.geekynu.goodertest.model.mySensor;
 import com.geekynu.goodertest.model.mySensorAdapter;
@@ -26,7 +27,9 @@ import qiu.niorgai.StatusBarCompat;
  * Created by yuanhonglei on 8/11/16.
  */
 public class SensorListActivity extends BaseActivity {
+
     private List<mySensor> mySensorList = new ArrayList<>();
+    PullRefreshLayout layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +37,14 @@ public class SensorListActivity extends BaseActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.sensor_list);
         StatusBarCompat.translucentStatusBar(SensorListActivity.this);
+
+        layout = (PullRefreshLayout) findViewById(R.id.swipeRefreshLayout);
+        layout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                initSensors();
+            }
+        });
         initSensors();
     }
 
@@ -78,5 +89,6 @@ public class SensorListActivity extends BaseActivity {
                 });
             }
         });
+        layout.setRefreshing(false);
     }
 }

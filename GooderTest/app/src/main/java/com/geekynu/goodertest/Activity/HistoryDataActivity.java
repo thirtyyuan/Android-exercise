@@ -7,6 +7,7 @@ import android.view.Window;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
+import com.baoyz.widget.PullRefreshLayout;
 import com.geekynu.goodertest.R;
 import com.geekynu.goodertest.util.PositionPointer;
 import com.geekynu.goodertest.util.SensorID;
@@ -19,6 +20,7 @@ import qiu.niorgai.StatusBarCompat;
 public class HistoryDataActivity extends BaseActivity {
 
     private WebView webView;
+    PullRefreshLayout layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,13 @@ public class HistoryDataActivity extends BaseActivity {
         setContentView(R.layout.history_data_view);
         StatusBarCompat.translucentStatusBar(HistoryDataActivity.this);
         webView = (WebView) findViewById(R.id.history_data_WebView);
+        layout = (PullRefreshLayout) findViewById(R.id.data_view_refresh);
+        layout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                initHistoryData();
+            }
+        });
         initHistoryData();
     }
 
@@ -42,5 +51,6 @@ public class HistoryDataActivity extends BaseActivity {
         ((WebSettings)localObject).setDefaultZoom(WebSettings.ZoomDensity.CLOSE);
         final String address  = historyDataHeaderUrl + sensorId + "?userkey=" + userkey;
         webView.loadUrl(address);
+        layout.setRefreshing(false);
     }
 }

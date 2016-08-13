@@ -10,9 +10,16 @@
         android:background="#1976D2">
     </com.geekynu.goodertest.UI.TitleMainLayout>
 
-    <ListView
-        android:id="@+id/sensor_list_view"
+    <com.baoyz.widget.PullRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </ListView>
+
+        <ListView
+            android:id="@+id/sensor_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </com.baoyz.widget.PullRefreshLayout>
+
 </LinearLayout>

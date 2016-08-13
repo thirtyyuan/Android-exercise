@@ -10,10 +10,16 @@
         android:background="#1976D2">
     </com.geekynu.goodertest.UI.TitleMainLayout>
 
-    <WebView
-        android:id="@+id/history_data_WebView"
+    <com.baoyz.widget.PullRefreshLayout
+        android:id="@+id/data_view_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </WebView>
+        <WebView
+            android:id="@+id/history_data_WebView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </WebView>
+    </com.baoyz.widget.PullRefreshLayout>
 </LinearLayout>
