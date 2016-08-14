@@ -10,7 +10,7 @@ import android.webkit.WebView;
 import com.baoyz.widget.PullRefreshLayout;
 import com.geekynu.goodertest.R;
 import com.geekynu.goodertest.util.PositionPointer;
-import com.geekynu.goodertest.util.SensorID;
+import com.geekynu.goodertest.util.SensorInfo;
 
 import qiu.niorgai.StatusBarCompat;
 
@@ -44,7 +44,7 @@ public class HistoryDataActivity extends BaseActivity {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(HistoryDataActivity.this);
         final String userkey = prefs.getString("userKey", "");
         int position = PositionPointer.getPositionItem();
-        long sensorId = SensorID.sensorIDArray[position];
+        long sensorId = SensorInfo.sensorIDArray[position];
         Object localObject = webView.getSettings();
         ((WebSettings)localObject).setJavaScriptEnabled(true);
         ((WebSettings)localObject).setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NORMAL);

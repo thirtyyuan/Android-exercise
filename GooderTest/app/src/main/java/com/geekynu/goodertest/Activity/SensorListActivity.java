@@ -48,7 +48,7 @@ public class SensorListActivity extends BaseActivity {
         initSensors();
     }
 
-    private void initSensors() {
+    public void initSensors() {
         String getGatewayURL = "http://open.lewei50.com/api/V1/User/GetSensorswithgateway?userkey=";
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(SensorListActivity.this);
         final String userkey = prefs.getString("userKey", "");

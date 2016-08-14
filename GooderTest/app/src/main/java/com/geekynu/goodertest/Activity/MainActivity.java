@@ -11,6 +11,7 @@ import android.widget.ListView;
 
 import com.baoyz.widget.PullRefreshLayout;
 import com.geekynu.goodertest.R;
+import com.geekynu.goodertest.Service.AlarmService;
 import com.geekynu.goodertest.model.Gateway;
 import com.geekynu.goodertest.model.GatewayAdapter;
 import com.geekynu.goodertest.util.HttpUtil;
@@ -45,7 +46,8 @@ public class MainActivity extends BaseActivity {
             }
         });
         initGateways();
-
+        Intent initService = new Intent(this, AlarmService.class);
+        startService(initService);
     }
 
     private void initGateways() {

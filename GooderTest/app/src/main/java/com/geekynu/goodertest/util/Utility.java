@@ -82,9 +82,15 @@ public class Utility  {
                     String sensorLastUpdateTime = JSensor.getString("lastUpdateTime");
                     boolean sensorIsOnline = JSensor.getBoolean("isOnline");
                     boolean sensorIsAlarm = JSensor.getBoolean("isAlarm");
-                    SensorID.sensorIDArray[j] = sensorId;
+                    SensorInfo.sensorIDArray[j] = sensorId;
+                    SensorInfo.isAlarm = sensorIsAlarm;
                     mySensor sensor = new mySensor(sensorId, sensorName, sensorValue, sensorUnit, sensorLastUpdateTime, sensorIsOnline , sensorIsAlarm);
                     sensorList.add(sensor);
+                    if (sensorIsAlarm) {
+                        SensorInfo.sensorName = sensorName;
+                    } else {
+                        SensorInfo.sensorName = null;
+                    }
                     j++;
                 } while (j < sensorNum);
                 return sensorList;

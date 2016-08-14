@@ -3,6 +3,8 @@ package com.geekynu.goodertest.util;
 /**
  * Created by yuanhonglei on 8/12/16.
  */
-public class SensorID {
+public class SensorInfo {
     public static Long[] sensorIDArray = new Long[100];
+    public static String sensorName = null;
+    public static boolean isAlarm = false;
 }

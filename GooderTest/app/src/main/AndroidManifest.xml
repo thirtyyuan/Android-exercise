@@ -31,6 +31,14 @@
         <activity android:name=".Activity.HistoryDataActivity">
 
         </activity>
+
+        <service android:name=".Service.AlarmService">
+
+        </service>
+
+        <receiver android:name=".Helper.AlarmReceiver">
+
+        </receiver>
     </application>
 
 </manifest>
