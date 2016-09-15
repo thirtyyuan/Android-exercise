@@ -35,6 +35,7 @@ import java.util.List;
  */
 public class AlarmService extends Service {
     private List<mySensor> mySensorList = new ArrayList<>();
+    private  int alarmTimes = 0;
 
     @Override
     public void onCreate() {
@@ -103,10 +104,14 @@ public class AlarmService extends Service {
 
     private void AlarmTimer() {
         AlarmManager manager = (AlarmManager) getSystemService(ALARM_SERVICE);
+
         int fiveMins = 5 * 60 * 1000;
-        long triggerAtTime = SystemClock.elapsedRealtime() + fiveMins;
-        Intent intent = new Intent(this, AlarmReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0 , intent, 0);
-        manager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, triggerAtTime, pendingIntent);
+        if (alarmTimes < 3) {
+            long triggerAtTime = SystemClock.elapsedRealtime() + fiveMins;
+            Intent intent = new Intent(this, AlarmReceiver.class);
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0 , intent, 0);
+            manager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, triggerAtTime, pendingIntent);
+            alarmTimes++;
+        }
     }
 }
