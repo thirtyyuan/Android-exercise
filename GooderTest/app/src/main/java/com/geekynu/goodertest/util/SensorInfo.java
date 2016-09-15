@@ -5,6 +5,8 @@ package com.geekynu.goodertest.util;
  */
 public class SensorInfo {
     public static Long[] sensorIDArray = new Long[100];
-    public static String sensorName = null;
-    public static boolean isAlarm = false;
+    public static String[] sensorName = new String[100];
+    public static String advice = "";
+    public static int alarmDeviceNum = 0;
+    public static boolean[] isAlarm = new boolean[100];
 }

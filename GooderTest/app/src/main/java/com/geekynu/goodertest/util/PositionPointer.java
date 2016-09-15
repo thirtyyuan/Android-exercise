@@ -4,7 +4,11 @@ package com.geekynu.goodertest.util;
  * Created by yuanhonglei on 8/11/16.
  */
 public class PositionPointer {
+    static int positionItem;
+
     static int position;
+
+    static int alarmPosition;
 
     public static int getPositionItem() {
         return positionItem;
@@ -14,8 +18,6 @@ public class PositionPointer {
         PositionPointer.positionItem = positionItem;
     }
 
-    static int positionItem;
-
     public static int getPosition() {
         return position;
     }
@@ -24,4 +26,11 @@ public class PositionPointer {
         PositionPointer.position = position;
     }
 
+    public static int getAlarmPosition() {
+        return alarmPosition;
+    }
+
+    public static void setAlarmPosition(int alarmPosition) {
+        PositionPointer.alarmPosition = alarmPosition;
+    }
 }

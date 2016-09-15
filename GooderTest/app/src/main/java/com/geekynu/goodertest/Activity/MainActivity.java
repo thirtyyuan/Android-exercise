@@ -1,7 +1,9 @@
 package com.geekynu.goodertest.Activity;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
@@ -16,6 +18,7 @@ import com.geekynu.goodertest.model.Gateway;
 import com.geekynu.goodertest.model.GatewayAdapter;
 import com.geekynu.goodertest.util.HttpUtil;
 import com.geekynu.goodertest.util.PositionPointer;
+import com.geekynu.goodertest.util.SensorInfo;
 import com.geekynu.goodertest.util.Utility;
 import com.sdsmdg.tastytoast.TastyToast;
 
@@ -31,21 +34,25 @@ public class MainActivity extends BaseActivity {
     private List<Gateway> gatewayList = new ArrayList<>();
     PullRefreshLayout layout;
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.sensor_list);
+        setContentView(R.layout.decive_list);
         StatusBarCompat.translucentStatusBar(MainActivity.this);
 
         layout = (PullRefreshLayout) findViewById(R.id.swipeRefreshLayout);
         layout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                SensorInfo.advice = "";
                 initGateways();
             }
         });
+
         initGateways();
+
         Intent initService = new Intent(this, AlarmService.class);
         startService(initService);
     }
@@ -65,7 +72,7 @@ public class MainActivity extends BaseActivity {
                         if (gatewayList == null) {
                             TastyToast.makeText(MainActivity.this, "获取失败，请稍后再试", TastyToast.LENGTH_SHORT, TastyToast.ERROR);
                         } else {
-                            GatewayAdapter adapter = new GatewayAdapter(MainActivity.this, R.layout.sensor_list_group_item, gatewayList);
+                            GatewayAdapter adapter = new GatewayAdapter(MainActivity.this, R.layout.device_list_item, gatewayList);
                             ListView listView = (ListView) findViewById(R.id.sensor_list_view);
                             listView.setAdapter(adapter);
                             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

@@ -13,6 +13,7 @@ public class AlarmReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Intent startService = new Intent(context, AlarmService.class);
+        startService.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(startService);
     }
 }
