@@ -8,9 +8,6 @@ Today is 12.3 on Dec,2015.I start to use Github,I don't know so many details abo
 I'm an Android primary developer,who like any thing which is simple.
 Steve Jobs and Kobe Bryant both are my idol,they are so Great man for us!
 
-## My Motto
-Stay hungry,Stay foolish,and Stay crazy enough.
-
 ## Follow Me
 
 * Github: [thirtyyuan](https://github.com/thirtyyuan)
